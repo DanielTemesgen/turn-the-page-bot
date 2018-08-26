@@ -8,9 +8,9 @@ lyrics = file.readlines() #changes text file to a list of strings, with each ele
 linenumber = 0 # initialises the linenumber as 0 before the while loop
 
 while True: #this while loop will run indefinitely
-	print(lyrics[linenumber]) #tweets the line
+	print(lyrics[line number]) #tweets the line
 	linenumber += 1 #adds one to the number of lines, so the next line is tweeted
-	time.sleep(2) #the gap between tweets (in seconds)
+	time.sleep(5) #the gap between tweets (in seconds)
 
 	#this only runs when the last line has been tweeted
 	if linenumber == len(lyrics):
