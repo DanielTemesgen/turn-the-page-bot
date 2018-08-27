@@ -1,6 +1,4 @@
 config.py
 .DS_Store
 __pycache__
-Pipfile
-Pipfile.lock
 .vscode/settings.json
