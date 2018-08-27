@@ -2,6 +2,7 @@ import time
 import tweepy
 from os import environ
 
+#For Heroku to pick up the twitter api credentials they must be in this form, with the secrets being inputting into Heroku Dashboard
 CONSUMER_KEY = environ['CONSUMER_KEY']
 CONSUMER_SECRET = environ['CONSUMER_SECRET']
 ACCESS_TOKEN = environ['ACCESS_TOKEN']
@@ -25,7 +26,7 @@ def turn_the_page(current_description):
 file = open("lyrics.txt") #opens lyrics.txt file
 lyrics = file.readlines() #changes text file to a list of strings, with each element being a line in the lyrics.txt file
 
-linenumber = 0 # initialises the linenumber as 0 before the while loop
+linenumber = 0 # initialises the linenumber as 0 before the while loop, if I'm redeploying this I should change this to the line number of the most recent tweet
 
 while True: #this while loop will run indefinitely
 	api.update_status(lyrics[linenumber]) #tweets the line
