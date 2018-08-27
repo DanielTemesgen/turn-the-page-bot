@@ -1,0 +1,1 @@
+worker: turn_the_page_bot.py

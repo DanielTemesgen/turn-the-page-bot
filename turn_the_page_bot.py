@@ -25,7 +25,7 @@ linenumber = 0 # initialises the linenumber as 0 before the while loop
 while True: #this while loop will run indefinitely
 	api.update_status(lyrics[linenumber]) #tweets the line
 	linenumber += 1 #adds one to the number of lines, so the next line is tweeted
-	time.sleep(60*60*3) #the gap between tweets (in seconds)
+	time.sleep(3*60*60) #the gap between tweets (in seconds)
 
 	#this only runs when the last line has been tweeted
 	if linenumber == len(lyrics):
@@ -34,11 +34,3 @@ while True: #this while loop will run indefinitely
 		new_description = turn_the_page(user.description)
 		api.update_profile(description = new_description)
 		linenumber = 0 #resets the line number back to 0
-
-		#ADD THE BIO UPDATE HERE
-		#READS THE BIO OF THE TWITTER BOT, e.g. '3 pages turned'
-		#Extracts the first number i.e. 3
-		# Makes new string with the number increased by 1 i.e 4 pages turned
-		# Assigns this new string to the description only if it's less than 160 characters
-
-
