@@ -1,1 +1,1 @@
-worker: turn_the_page_bot.py
+worker: python turn_the_page_bot.py
