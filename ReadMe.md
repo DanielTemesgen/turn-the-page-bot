@@ -1,4 +1,4 @@
-# [@turnthepagebot](twitter.com/turnthepagebot)
+# [@turnthepagebot](http://twitter.com/turnthepagebot)
 
 A twitter bot, written in python, that tweets the lyrics to The Streets - Turn the Page every 3 hours, forever.
 
@@ -16,7 +16,7 @@ It also updates the user description after every loop with the number of times t
 ## Why
 good question...
 
-I wanted to complete a simple project to learn about the Twitter API, Heroku deployment via GitHub.
+I wanted to complete a simple project to learn about the Twitter API and Heroku deployment via GitHub.
 Also ended up learning about Heroku dyno cycling, which is why the code is more persistent now.
 
 ## What
