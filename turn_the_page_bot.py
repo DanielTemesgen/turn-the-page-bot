@@ -14,15 +14,6 @@ auth.set_access_token(ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
 api = tweepy.API(auth)
 
 #define functions
-def turn_the_page(current_description):
-	''' Turns the page, e.g. '52 lines read. 2 pages turned' becomes '0 lines read. 3 pages turned.' '''
-	split_desc = current_description.split() #splits description to list of words for easier access
-	current_page = split_desc[3] #extracts the current page number from the user description, which is always at index 3
-	new_page = str(int(current_page) + 1) #converts this to an integer, adds one then converts back to a string
-	split_desc[3] = new_page #updates list with new page number
-	split_desc[0] = '0' #this resets the line number back to 0
-	new_description =  ' '.join(split_desc) #joins list of strings to one string with spaces
-	return new_description
 def get_linenumber():
 	user = api.get_user(1025844712794718209)
 	linenumber = int(user.description.split()[0]) #extracts line number from user description, always at index 0
@@ -38,6 +29,15 @@ def increment_linenumber():
 	else:
 		new_description = ' '.join([new_linenumber, rest_of_description])
 	api.update_profile(description = new_description)
+def turn_the_page(current_description):
+	''' Turns the page, e.g. '52 lines read. 2 pages turned' becomes '0 lines read. 3 pages turned.' '''
+	split_desc = current_description.split() #splits description to list of words for easier access
+	current_page = split_desc[3] #extracts the current page number from the user description, which is always at index 3
+	new_page = str(int(current_page) + 1) #converts this to an integer, adds one then converts back to a string
+	split_desc[3] = new_page #updates list with new page number
+	split_desc[0] = '0' #this resets the line number back to 0
+	new_description =  ' '.join(split_desc) #joins list of strings to one string with spaces
+	return new_description
 
 #open lyrics file
 file = open("lyrics.txt") #opens lyrics.txt file
