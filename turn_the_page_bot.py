@@ -14,23 +14,23 @@ auth.set_access_token(ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
 api = tweepy.API(auth)
 
 #define functions
-def turn_the_page(current_description): 
+def turn_the_page(current_description):
 	''' Adds 1  to the current description, e.g. '62 pages turned.' becomes '63 pages turned.' '''
 	current_page = current_description.split()[0] #extracts the number from the user description, which is always the first 'word'
 	new_page = str(int(current_page) + 1) #converts this to an integer, adds one then converts back to a string
 	constant = current_description.split()[1:] #initalises the constant i.e. the rest of the original description
 	constant.insert(0, new_page) #inserts the new page number into the constant, now we have a the new description but in list form
 	separator = ' ' #need to define a separator for the .join() method below
-	new_description = separator.join(constant) #this method converts a list of strings to one string, separated by a space i.e.' ' 
+	new_description = separator.join(constant) #this method converts a list of strings to one string, separated by a space i.e.' '
 	return new_description #the function returns this new description
 def get_linenumber():
-    with open("linenumber.txt", "r") as f:
-        linenumber = f.read()
-        linenumber = int(linenumber) #converts to int
-        return linenumber
+	with open("linenumber.txt", "r") as f:
+		linenumber = f.read()
+		linenumber = int(linenumber) #converts to int
+		return linenumber
 def increment_linenumber(linenumber):
-    with open("linenumber.txt", "w") as f:
-        f.write(str(linenumber + 1)) #updates linenumber.txt
+	with open("linenumber.txt", "w") as f:
+		f.write(str(linenumber + 1)) #updates linenumber.txt
 
 #open lyrics file
 file = open("lyrics.txt") #opens lyrics.txt file
@@ -48,4 +48,4 @@ while True: #this while loop will run indefinitely
 		new_description = turn_the_page(user.description)
 		api.update_profile(description = new_description)
 		with open("linenumber.txt", "w") as f:
-    		f.write(str(0)) #resets the line number back to 0
+			f.write(str(0)) #resets the line number back to 0
