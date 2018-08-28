@@ -13,6 +13,7 @@ auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
 auth.set_access_token(ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
 api = tweepy.API(auth)
 
+#define functions
 def turn_the_page(current_description): 
 	''' Adds 1  to the current description, e.g. '62 pages turned.' becomes '63 pages turned.' '''
 	current_page = current_description.split()[0] #extracts the number from the user description, which is always the first 'word'
@@ -22,21 +23,29 @@ def turn_the_page(current_description):
 	separator = ' ' #need to define a separator for the .join() method below
 	new_description = separator.join(constant) #this method converts a list of strings to one string, separated by a space i.e.' ' 
 	return new_description #the function returns this new description
+def get_linenumber():
+    with open("linenumber.txt", "r") as f:
+        linenumber = f.read()
+        linenumber = int(linenumber) #converts to int
+        return linenumber
+def increment_linenumber(linenumber):
+    with open("linenumber.txt", "w") as f:
+        f.write(str(linenumber + 1)) #updates linenumber.txt
 
+#open lyrics file
 file = open("lyrics.txt") #opens lyrics.txt file
 lyrics = file.readlines() #changes text file to a list of strings, with each element being a line in the lyrics.txt file
 
-linenumber = 0 # initialises the linenumber as 0 before the while loop, if I'm redeploying this I should change this to the line number of the most recent tweet
-
 while True: #this while loop will run indefinitely
-	api.update_status(lyrics[linenumber]) #tweets the line
-	linenumber += 1 #adds one to the number of lines, so the next line is tweeted
+	api.update_status(lyrics[get_linenumber()]) #tweets the line
+	increment_linenumber(get_linenumber()) #adds one to the number of lines, so the next line is tweeted
 	time.sleep(3*60*60) #the gap between tweets (in seconds)
 
 	#this only runs when the last line has been tweeted
-	if linenumber == len(lyrics):
+	if get_linenumber() == len(lyrics):
 		#gets a twitter 'user model' which is Python Class of all information asssociated with a user, in this case the bot
 		user = api.get_user(1025844712794718209)
 		new_description = turn_the_page(user.description)
 		api.update_profile(description = new_description)
-		linenumber = 0 #resets the line number back to 0
+		with open("linenumber.txt", "w") as f:
+    		f.write(str(0)) #resets the line number back to 0
