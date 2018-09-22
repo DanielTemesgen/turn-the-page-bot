@@ -46,11 +46,12 @@ lyrics = file.readlines() #changes text file to a list of strings, with each ele
 while True: #this while loop will run indefinitely
 	api.update_status(lyrics[get_linenumber()]) #tweets the line
 	increment_linenumber() #adds one to the number of lines, so the next line is tweeted later
-	time.sleep(3*60*60) #the gap between tweets (in seconds)
-
+	
 	#this only runs when the last line has been tweeted
 	if get_linenumber() == len(lyrics):
-		#gets a twitter account User model' which is Python Class of all information asssociated with a user, in this case the bot
+		#gets a twitter account User model' which is Python Class of all information associated with a user, in this case the bot
 		user = api.get_user(1025844712794718209)
 		new_description = turn_the_page(user.description)
 		api.update_profile(description = new_description)
+	
+	time.sleep(3*60*60) #the gap between tweets (in seconds)
