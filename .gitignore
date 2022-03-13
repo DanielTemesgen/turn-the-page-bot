@@ -1,4 +1,5 @@
-config.py
-.DS_Store
+*.pytest_cache
+*.idea
 __pycache__
+.DS_Store
 .vscode/settings.json
